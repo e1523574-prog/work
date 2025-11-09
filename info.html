@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TechFix Ghana — Your One-Stop Tech Repair & Support Hub</title>
+    <meta
+      name="description"
+      content="Book verified technicians for device repair, maintenance and remote support in Ghana."
+    />
+    <style>
+      /* --- Simple, clean styling for a single-file demo --- */
+      :root {
+        --brand: #0b6e4f;l
+        --accent: #f6b042;
+        --muted: #6b7280;
+        --card: #ffffff;
+        --bg: #f3f6f7;
+        --glass: rgba(255, 255, 255, 0.75);
+        font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: linear-gradient(180deg, var(--bg), #c55092 100%);
+        color: #3e60af;
+        -webkit-font-smoothing: antialiased;
+      }
+      header {
+        background: var(--card);
+        backdrop-filter: blur(4px);
+        box-shadow: 0 2px 8px rgba(12, 18, 20, 0.06);
+        position: sticky;
+        top: 0;
+        z-index: 40;
+      }
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 24px;
+      }
+      .brand {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+      .logo {
+        width: 48px;
+        height: 48px;
+        border-radius: 9px;
+        display: inline-grid;
+        place-items: center;
+        background: linear-gradient(135deg, var(--brand), #07836a);
+        color: white;
+        font-weight: 700;
+      }
+      nav {
+        margin-left: auto;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+      nav a {
+        color: var(--muted);
+        text-decoration: none;
+        padding: 8px 12px;
+        border-radius: 8px;
+      }
+      nav a.active,
+      nav a:hover {
+        background: var(--glass);
+        color: var(--brand);
+      }
+      .hero {
+        display: grid;
+        grid-template-columns: 1fr 420px;
+        gap: 24px;
+        align-items: center;
+        padding: 44px 0;
+      }
+      .hero h1 {
+        font-size: 32px;
+        margin: 0 0 12px;
+      }
+      .hero p {
+        margin: 0 0 18px;
+        color: var(--muted);
+      }
+      .cta {
+        display: flex;
+        gap: 10px;
+      }
+      .btn {
+        background: var(--brand);
+        color: white;
+        padding: 10px 14px;
+        border-radius: 10px;
+        border: 0;
+        cursor: pointer;
+      }
+      .btn.ghost {
+        background: transparent;
+        border: 1px solid rgba(11, 110, 79, 0.08);
+        color: var(--brand);
+      }
+      .card {
+        background: var(--card);
+        padding: 18px;
+        border-radius: 12px;
+        box-shadow: 0 6px 18px rgba(12, 18, 20, 0.06);
+      }
+      .services {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-top: 18px;
+      }
+      .service {
+        padding: 14px;
+        border-radius: 12px;
+        border: 1px solid rgba(11, 110, 79, 0.04);
+      }
+      .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      footer {
+        padding: 28px 0;
+        color: var(--muted);
+      }
+      .small {
+        font-size: 13px;
+      }
+      form input,
+      form textarea,
+      select {
+        width: 100%;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #e6eef0;
+        margin-top: 8px;
+      }
+      .tech-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .tech {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+      .avatar {
+        width: 44px;
+        height: 44px;
+        border-radius: 8px;
+        background: linear-gradient(135deg, #f6b042, #f97316);
+        display: grid;
+        place-items: center;
+        color: white;
+        font-weight: 700;
+      }
+      .status {
+        font-size: 12px;
+        padding: 6px 8px;
+        border-radius: 999px;
+      }
+      .status.online {
+        background: rgba(11, 110, 79, 0.08);
+        color: var(--brand);
+      }
+      .status.offline {
+        background: rgba(120, 120, 120, 0.06);
+        color: var(--muted);
+      }
+      .tracking {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      } /* Responsive */
+      @media (max-width: 900px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+        .services {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 600px) {
+        .services {
+          grid-template-columns: 1fr;
+        }
+        nav {
+          display: none;
+        }
+      }
+
+      /* small util */
+      .muted {
+        color: var(--muted);
+      }
+      .center {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .mb-8 {
+        margin-bottom: 32px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container" style="display: flex; align-items: center">
+        <div class="brand">
+          <div class="logo" aria-hidden>
+            <!-- simple SVG wrench+circuit -->
+            <svg
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M3 21l6-6"
+                stroke="white"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M14.7 6.3a6 6 0 0 1 8.5 8.5l-1.4 1.4-4-4-1.7 1.7-4-4 1.7-1.7 4 4 4-4-1.4-1.4a6 6 0 0 1-8.5-8.5z"
+                stroke="white"
+                stroke-width="1.1"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+          <div>
+            <div style="font-weight: 700">TechFix Ghana</div>
+            <div class="small muted">Repair • Support • Maintain</div>
+          </div>
+        </div>
+        <nav>
+          <a href="#home" class="active">Home</a>
+          <a href="#services">Services</a>
+          <a href="#book">Book</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+    <main class="container">
+      <section id="home" class="hero">
+        <div>
+          <h1>Fast, reliable and transparent tech repairs across Accra.</h1>
+          <p class="muted">
+            Book verified technicians to fix phones, laptops, routers and small
+            office networks. Track your repair, get receipts and subscribe to
+            maintenance plans.
+          </p>
+          <div class="cta">
+            <button class="btn" onclick="scrollToSection('book')">
+              Book Technician
+            </button>
+            <button class="btn ghost" onclick="scrollToSection('services')">
+              View Services
+            </button>
+          </div>
+          <div class="card mt-6" style="margin-top: 18px">
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+              "
+            >
+              <div>
+                <div class="small muted">How it works</div>
+                <div style="font-weight: 700">Choose • Book • Track</div>
+              </div>
+              <div class="small muted">
+                Secure payments • Verified technicians
+              </div>
+            </div>
+
+            <div class="services" style="margin-top: 14px">
+              <div class="service">
+                <strong>Onsite Repairs</strong>
+                <div class="small muted">
+                  Technicians come to your location for hardware repairs.
+                </div>
+              </div>
+              <div class="service">
+                <strong>Remote Support</strong>
+                <div class="small muted">
+                  Quick software fixes over the internet.
+                </div>
+              </div>
+              <div class="service">
+                <strong>Maintenance Plans</strong>
+                <div class="small muted">
+                  Monthly plans for businesses and schools.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside>
+          <div class="card">
+            <h3 style="margin: 0">Quick Book</h3>
+            <p class="small muted">
+              Fill basic details to request a technician. You will get a booking
+              ID to track progress.
+            </p>
+            <form id="quickBook">
+              <label
+                >Full name
+                <input required id="q_name" placeholder="e.g. Joseph Mensah"
+              /></label>
+              <label
+                >Phone
+                <input
+                  required
+                  id="q_phone"
+                  placeholder="0244xxx"
+                  pattern="[0-9+ ]+"
+              /></label>
+              <label
+                >Device Type
+                <select id="q_device">
+                  <option>Laptop</option>
+                  <option>Phone</option>
+                  <option>Router/Network</option>
+                  <option>Desktop</option>
+                  <option>Other</option>
+                </select>
+              </label>
+              <label
+                >Problem Summary
+                <textarea
+                  id="q_issue"
+                  rows="3"
+                  placeholder="Short description"
+                ></textarea>
+              </label>
+              <div style="display: flex; gap: 8px; margin-top: 8px">
+                <button type="submit" class="btn">Request</button>
+                <button
+                  type="button"
+                  class="btn ghost"
+                  onclick="generateSampleBooking()"
+                >
+                  Sample
+                </button>
+              </div>
+            </form>
+            <div id="quickResult" style="margin-top: 12px"></div>
+          </div>
+
+          <div class="card" style="margin-top: 12px">
+            <h4 style="margin: 0">Nearby Technicians</h4>
+            <div class="tech-list" id="techList" style="margin-top: 10px"></div>
+            <div style="margin-top: 12px" class="small muted">
+              All technicians are background-checked and rated after each job.
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section id="services" class="mb-8">
+        <h2>Services</h2>
+        <div class="grid-2" style="margin-top: 12px">
+          <div class="card">
+            <h3>Repair & Diagnostics</h3>
+            <p class="muted">
+              Hardware repair, component replacement, data recovery and
+              diagnostics for phones, laptops and desktops.
+            </p>
+            <ul>
+              <li>Screen replacement</li>
+              <li>Battery replacement</li>
+              <li>Motherboard & component repair</li>
+              <li>Data backup and recovery</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Business Plans</h3>
+            <p class="muted">
+              Scheduled maintenance, remote monitoring and priority onsite
+              visits for small businesses and schools.
+            </p>
+            <ul>
+              <li>Monthly subscription tiers</li>
+              <li>Onsite SLA (4-24 hours depending on tier)</li>
+              <li>Inventory of spare parts</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="book" class="mb-8">
+        <h2>Book a Technician</h2>
+        <div class="grid-2" style="margin-top: 12px">
+          <div class="card">
+            <form id="bookForm">
+              <label>Full name<input id="name" required /></label>
+              <label>Phone<input id="phone" required /></label>
+              <label
+                >Location (address)<input
+                  id="location"
+                  required
+                  placeholder="Accra, Ghana"
+              /></label>
+              <label
+                >Device type<select id="deviceType">
+                  <option>Phone</option>
+                  <option>Laptop</option>
+                  <option>Desktop</option>
+                  <option>Router</option>
+                  <option>Other</option>
+                </select></label
+              >
+              <label
+                >Problem description<textarea
+                  id="description"
+                  rows="4"
+                  placeholder="What isn't working?"
+                ></textarea>
+              </label>
+              <label
+                >Preferred service<select id="serviceType">
+                  <option>Onsite Repair</option>
+                  <option>Remote Support</option>
+                  <option>Maintenance Plan</option>
+                </select></label
+              >
+              <div style="display: flex; gap: 8px; margin-top: 12px">
+                <button class="btn" type="submit">Create Booking</button>
+                <button
+                  class="btn ghost"
+                  type="button"
+                  onclick="resetBookingForm()"
+                >
+                  Reset
+                </button>
+              </div>
+            </form>
+            <div id="bookingResult" style="margin-top: 12px"></div>
+          </div>
+
+          <div class="card">
+            <h3>Tracking</h3>
+            <p class="muted">
+              Enter your booking ID to see current status and technician
+              details.
+            </p>
+            <label>Booking ID<input id="trackId" /></label>
+            <div style="display: flex; gap: 8px; margin-top: 8px">
+              <button class="btn" onclick="trackBooking()">Track</button>
+              <button class="btn ghost" onclick="showAllBookings()">
+                All Bookings
+              </button>
+            </div>
+            <div id="trackResult" style="margin-top: 12px"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="mb-8">
+        <h2>About TechFix Ghana</h2>
+        <div class="card">
+          <p class="muted">
+            TechFix Ghana was built to solve the accessibility and trust
+            problems in tech repair. We connect verified technicians with
+            customers who want transparent pricing, fast response and secure
+            payments.
+          </p>
+          <h4>Team</h4>
+          <div class="tech-list">
+            <div class="tech">
+              <div class="avatar">E</div>
+              <div>
+                <strong>Emmanuel Kidibi</strong>
+                <div class="small muted">CEO / Project Manager</div>
+              </div>
+            </div>
+            <div class="tech">
+              <div class="avatar">M</div>
+              <div>
+                <strong>Henry Bryan Dogbey</strong>
+                <div class="small muted">Operations Manager</div>
+              </div>
+            </div>
+            <div class="tech">
+              <div class="avatar">I</div>
+              <div>
+                <strong>Kobinah Adantwi Acquah</strong>
+                <div class="small muted">Lead Developer</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="mb-8">
+        <h2>Contact</h2>
+        <div class="grid-2" style="margin-top: 12px">
+          <div class="card">
+            <h4>Get in touch</h4>
+            <p class="muted">
+              Email: e1523574@gmail.com • Phone: +233 538 076 003
+            </p>
+            <form id="contactForm">
+              <label>Your name<input id="c_name" required /></label>
+              <label
+                >Your email<input id="c_email" type="email" required
+              /></label>
+              <label>Message<textarea id="c_msg" rows="4"></textarea></label>
+              <div style="display: flex; gap: 8px; margin-top: 8px">
+                <button class="btn" type="submit">Send</button>
+                <button
+                  class="btn ghost"
+                  type="button"
+                  onclick="document.getElementById('contactForm').reset()"
+                >
+                  Reset
+                </button>
+              </div>
+            </form>
+          </div>
+          <div class="card">
+            <h4>Office</h4>
+            <p class="muted">Accra — Near University Of Professional Studies</p>
+            <div class="small muted">Map (placeholder)</div>
+            <iframe
+              width="100%"
+              height="200"
+              style="border: 0; margin-top: 10px"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3972.2!2d-0.2059!3d5.6037!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdf9e2d4f3c6f1b%3A0x7a2b5c1f8b1a2a1d!2sAccra%20Central!5e0!3m2!1sen!2sgh!4v1690000000000"
+              aria-hidden="false"
+            ></iframe>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-8">
+        <h2>Security & Processes</h2>
+        <div class="card">
+          <ul>
+            <li>Encrypted data at rest and in transit (SSL/TLS).</li>
+            <li>
+              Technician identity verification and background check before
+              onboarding.
+            </li>
+            <li>Role-based access controls for staff and admin panels.</li>
+            <li>
+              Regular backups and retention policy (daily backup, 90-day
+              retention suggested).
+            </li>
+            <li>Transaction receipts and audit logs for every job.</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="container center" style="justify-content: space-between">
+        <div class="small muted">
+          ©️ TechFix Ghana — Built by Emmanuel Kidibi 2025
+        </div>
+        <div class="small muted">Made with ♥️ in UPSA</div>
+      </div>
+    </footer>
+    <script>
+      /* --- Simple frontend logic to simulate bookings and technician assignment --- */
+      const sampleTechs = [
+        {
+          id: "T-001",
+          name: "Zatey Kwabena Prince",
+          role: "Technician",
+          skills: ["Laptop", "Desktop"],
+          rating: 4.8,
+          online: true,
+        },
+        {
+          id: "T-002",
+          name: "Andrews Oliver",
+          role: "Technician",
+          skills: ["Phone", "Battery"],
+          rating: 4.6,
+          online: true,
+        },
+        {
+          id: "T-003",
+          name: "Amoah Kelvin Kwasi",
+          role: "Technician",
+          skills: ["Network", "Router"],
+          rating: 4.4,
+          online: false,
+        },
+      ];
+
+      function saveTechs() {
+        localStorage.setItem("techs", JSON.stringify(sampleTechs));
+      }
+      function loadTechs() {
+        const t = localStorage.getItem("techs");
+        return t ? JSON.parse(t) : sampleTechs;
+      }
+
+      function renderTechList() {
+        const list = document.getElementById("techList");
+        list.innerHTML = "";
+        const techs = loadTechs();
+        techs.forEach((t) => {
+          const el = document.createElement("div");
+          el.className = "tech card";
+          el.innerHTML = `<div class="avatar">${
+            t.name[0]
+          }</div><div style="flex:1"><strong>${
+            t.name
+          }</strong><div class="small muted">${t.skills.join(", ")} • ${
+            t.role
+          }</div></div><div><div class="status ${
+            t.online ? "online" : "offline"
+          }">${t.online ? "Online" : "Offline"}</div></div>`;
+          list.appendChild(el);
+        });
+      }
+
+      function uid(prefix = "B") {
+        return (
+          prefix + "-" + Math.random().toString(36).slice(2, 9).toUpperCase()
+        );
+      }
+
+      function persistBooking(b) {
+        const raw = localStorage.getItem("bookings");
+        const arr = raw ? JSON.parse(raw) : [];
+        arr.push(b);
+        localStorage.setItem("bookings", JSON.stringify(arr));
+      }
+
+      function createBooking(data) {
+        // simple assignment: nearest available online tech by skill match
+        const techs = loadTechs();
+        let assigned = techs.find(
+          (t) =>
+            t.online &&
+            t.skills.some((s) =>
+              data.deviceType.toLowerCase().includes(s.toLowerCase())
+            )
+        );
+        if (!assigned) assigned = techs.find((t) => t.online) || techs[0];
+
+        const booking = {
+          id: uid("BK"),
+          name: data.name,
+          phone: data.phone,
+          location: data.location,
+          deviceType: data.deviceType,
+          serviceType: data.serviceType,
+          description: data.description,
+          status: assigned ? "Assigned" : "Pending",
+          technician: assigned
+            ? {
+                id: assigned.id,
+                name: assigned.name,
+                phone: "+233 24X XXX XXX",
+              }
+            : null,
+          created: new Date().toISOString(),
+        };
+        persistBooking(booking);
+        return booking;
+      }
+
+      document.getElementById("bookForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const data = {
+          name: document.getElementById("name").value,
+          phone: document.getElementById("phone").value,
+          location: document.getElementById("location").value,
+          deviceType: document.getElementById("deviceType").value,
+          serviceType: document.getElementById("serviceType").value,
+          description: document.getElementById("description").value,
+        };
+        const booking = createBooking(data);
+        document.getElementById(
+          "bookingResult"
+        ).innerHTML = `<div class="card"><strong>Booking Created</strong><div class="small muted">Your booking ID: <code>${
+          booking.id
+        }</code></div><div style="margin-top:8px">Status: ${booking.status}${
+          booking.technician ? " • Technician: " + booking.technician.name : ""
+        }</div></div>`;
+        document.getElementById("bookForm").reset();
+      });
+
+      function resetBookingForm() {
+        document.getElementById("bookForm").reset();
+        document.getElementById("bookingResult").innerHTML = "";
+      }
+
+      document.getElementById("quickBook").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const data = {
+          name: document.getElementById("q_name").value,
+          phone: document.getElementById("q_phone").value,
+          deviceType: document.getElementById("q_device").value,
+          description: document.getElementById("q_issue").value,
+          location: "(not provided)",
+          serviceType: "Onsite Repair",
+        };
+        const book = createBooking(data);
+        document.getElementById(
+          "quickResult"
+        ).innerHTML = `<div class="small muted">Booking created — ID: <code>${book.id}</code>. Use the Tracker to check status.</div>`;
+        document.getElementById("quickBook").reset();
+      });
+
+      function trackBooking() {
+        const id = document.getElementById("trackId").value.trim();
+        const raw = localStorage.getItem("bookings");
+        const arr = raw ? JSON.parse(raw) : [];
+        const b = arr.find((x) => x.id === id);
+        const out = document.getElementById("trackResult");
+        if (!b) {
+          out.innerHTML = `<div class="small muted">No booking found with ID ${id}</div>`;
+          return;
+        }
+        out.innerHTML = `<div class="card"><strong>Booking ${
+          b.id
+        }</strong><div class="small muted">Status: ${
+          b.status
+        }</div><div style="margin-top:8px">Technician: ${
+          b.technician
+            ? b.technician.name + " (" + b.technician.id + ")"
+            : "Not assigned yet"
+        }</div><div class="small muted" style="margin-top:8px">Created: ${new Date(
+          b.created
+        ).toLocaleString()}</div></div>`;
+      }
+
+      function showAllBookings() {
+        const raw = localStorage.getItem("bookings");
+        const arr = raw ? JSON.parse(raw) : [];
+        const out = document.getElementById("trackResult");
+        if (!arr.length) {
+          out.innerHTML = '<div class="small muted">No bookings yet.</div>';
+          return;
+        }
+        out.innerHTML = arr
+          .map(
+            (b) =>
+              `<div class="card" style="margin-bottom:8px"><strong>${
+                b.id
+              }</strong> • ${b.name} • ${b.status}<div class="small muted">${
+                b.technician ? "Tech: " + b.technician.name : "No tech assigned"
+              }</div></div>`
+          )
+          .join("");
+      }
+
+      document.getElementById("contactForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const msg = {
+          id: uid("MSG"),
+          name: document.getElementById("c_name").value,
+          email: document.getElementById("c_email").value,
+          message: document.getElementById("c_msg").value,
+          created: new Date().toISOString(),
+        };
+        const raw = localStorage.getItem("messages");
+        const arr = raw ? JSON.parse(raw) : [];
+        arr.push(msg);
+        localStorage.setItem("messages", JSON.stringify(arr));
+        alert("Message sent — thank you!");
+        document.getElementById("contactForm").reset();
+      });
+
+      function generateSampleBooking() {
+        document.getElementById("q_name").value = "Adwoa Frimpong";
+        document.getElementById("q_phone").value = "+233244123456";
+        document.getElementById("q_device").value = "Phone";
+        document.getElementById("q_issue").value =
+          "Screen cracked and not responding";
+      }
+
+      function scrollToSection(id) {
+        document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+      }
+
+      // On page load
+      (function init() {
+        if (!localStorage.getItem("techs")) saveTechs();
+        renderTechList();
+        // highlight nav based on scroll (simple)
+        const links = document.querySelectorAll("nav a");
+        links.forEach((a) =>
+          a.addEventListener("click", () => {
+            links.forEach((x) => x.classList.remove("active"));
+            a.classList.add("active");
+          })
+        );
+      })();
+    </script>
+  </body>
+</html>
